@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f1f1;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+      color: #333;
+    }
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+    .pin-container {
+      position: relative;
+    }
+    .pin-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: transparent;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #666;
+    }
+    .pin-toggle:hover {
+      color: #444;
+    }
+    button[type="submit"],
+    button[type="button"],
+    .send-otp,
+    .resend-otp {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 5px 10px; 
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px; 
+    }
+    button[type="submit"]:hover,
+    button[type="button"]:hover,
+    .send-otp:hover,
+    .resend-otp:hover {
+      background-color: #45a049;
+    }
+    .otp-container {
+      display: flex;
+      align-items: center;
+    }
+    .otp-input {
+      flex: 1;
+      margin-right: 10px;
+    }
+    .send-otp,
+    .resend-otp {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 4px 8px; 
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 10px; 
+    }
+    .send-otp:hover,
+    .resend-otp:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h2>Pay Useing Debit Card</h2>
+  <div class="form-container">
+    <form id="payment-form">
+      <div class="form-group">
+        <label for="card_number">Card Number:</label>
+        <input type="text" id="card_number" name="card_number" required>
+      </div>
+      <div class="form-group">
+        <label for="expiry_date">Expiration Date:</label>
+        <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YYYY" pattern="(0[1-9]|1[0-2])\/[0-9]{4}" required>
+      </div>
+      <div class="form-group">
+        <label for="name">Name on Card:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <div class="otp-container">
+          <input type="tel" id="phone" name="phone" required>
+          <button type="button" class="send-otp" onclick="sendOTP()">Send OTP</button>
+        </div>
+      </div>
+      <div class="form-group pin-container">
+        <label for="pin">Enter PIN:</label>
+        <input type="password" id="pin" name="pin" required>
+        <button type="button" class="pin-toggle" onclick="togglePIN()">👁️</button>
+      </div>
+      <div class="form-group otp-container">
+        <input type="text" id="otp" name="otp" class="otp-input" placeholder="Enter OTP" required>
+        <button type="button" class="resend-otp" id="resend-otp" onclick="resendOTP()">Resend OTP</button>
+      </div>
+      <div class="form-group" id="otp-timer" style="display: none;">
+        <span id="otp-timer-text">You can resend OTP in <span id="otp-timer-value">60</span> seconds</span>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <button type="submit">Make Payment</button>
+    </form>
+  </div>
+
+  <script>
+    function togglePIN() {
+      var pinInput = document.getElementById("pin");
+      var pinToggle = document.querySelector(".pin-toggle");
+
+      if (pinInput.type === "password") {
+        pinInput.type = "text";
+        pinToggle.textContent = "👁️";
+      } else {
+        pinInput.type = "password";
+        pinToggle.textContent = "🔒";
+      }
+    }
+
+    function resendOTP() {
+    
+      alert("OTP has been resent!");
+      var timer = 60;
+      var otpTimerValue = document.getElementById("otp-timer-value");
+      var otpTimerText = document.getElementById("otp-timer-text");
+      var resendOTPButton = document.getElementById("resend-otp");
+      var sendOTPButton = document.getElementById("send-otp");
+
+      resendOTPButton.disabled = true;
+      otpTimerText.style.display = "block";
+
+      var countdown = setInterval(function() {
+        timer--;
+        otpTimerValue.textContent = timer;
+        if (timer <= 0) {
+          clearInterval(countdown);
+          otpTimerText.style.display = "none";
+          resendOTPButton.disabled = false;
+        }
+      }, 1000);
+    }
+
+    function sendOTP() {
+      
+      alert("OTP has been sent!");
+      var timer = 60;
+      var otpTimerValue = document.getElementById("otp-timer-value");
+      var otpTimerText = document.getElementById("otp-timer-text");
+      var resendOTPButton = document.getElementById("resend-otp");
+      var sendOTPButton = document.getElementById("send-otp");
+
+      sendOTPButton.disabled = true;
+      otpTimerText.style.display = "block";
+
+      var countdown = setInterval(function() {
+        timer--;
+        otpTimerValue.textContent = timer;
+        if (timer <= 0) {
+          clearInterval(countdown);
+          otpTimerText.style.display = "none";
+          sendOTPButton.disabled = false;
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Deals</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header img {
+            height: 40px;
+        }
+        .main-content {
+            padding: 20px;
+        }
+        .deal-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            padding: 15px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        .deal-card img {
+            width: 100px;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        .deal-details {
+            flex: 1;
+        }
+        .deal-card h5 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .deal-card p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .deal-card .price {
+            color: red;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .deal-card .original-price {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .deal-card button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .deal-card button:hover {
+            background-color: #0056b3;
+        }
+        .rating {
+            display: flex;
+            margin: 10px 0;
+        }
+        .rating .diamond {
+            width: 20px;
+            height: 20px;
+            background-color: rgb(0, 0, 0);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            margin-right: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .rating .diamond.selected,
+        .rating .diamond:hover,
+        .rating .diamond:hover ~ .diamond {
+            background-color: rgb(255, 0, 217);
+        }
+        .review-box {
+            margin-left: 20px;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Melia Hotels & Resorts">
+        <div>
+            <!-- Additional header elements such as menu or login can be added here -->
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="container">
+            <h2>Our hotel has such deals</h2>
+            <div id="cardsContainer">
+                <!-- Cards will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+       var imageUrls = [
+    "images/HOTELS/hotel1.jpg",
+    "images/hotel/hotel2.jpg",
+    "images/hotel/hotel3.jpg",
+    "images/hotel/hotel4.jpg",
+    "images/hotel/hotel5.jpg",
+    "images/hotel/hotel6.jpg",
+    "images/hotel/hotel7.jpg",
+    "images/hotel/hotel8.jpg",
+    "images/hotel/hotel9.jpg",
+    "images/hotel/hotel10.jpg",
+    "images/hotel/hotel11.jpg",
+    "images/hotel/hotel12.jpg",
+    "images/hotel/hotel13.jpg",
+    "images/hotel/hotel14.jpg",
+    "images/hotel/hotel15.jpg",
+    "images/hotel/hotel16.jpg",
+    "images/hotel/hotel17.jpg",
+    "images/hotel/hotel18.jpg",
+    "images/hotel/hotel19.jpg",
+    "images/hotel/hotel20.jpg",
+    "images/hotel/hotel21.jpg",
+    "images/hotel/hotel22.jpg",
+    "images/hotel/hotel23.jpg",
+    "images/hotel/hotel24.jpg",
+    "images/hotel/hotel25.jpg",
+    "images/hotel/hotel26.jpg",
+    "images/hotel/hotel27.jpg",
+    "images/hotel/hotel28.jpg",
+    "images/hotel/hotel29.jpg",
+    "images/hotel/hotel30.jpg",
+    "images/hotel/hotel31.jpg",
+    "images/hotel/hotel32.jpg",
+    "images/hotel/hotel33.jpg",
+    "images/hotel/hotel34.jpg",
+    "images/hotel/hotel35.jpg",
+    "images/hotel/hotel36.jpg",
+    "images/hotel/hotel37.jpg",
+    "images/hotel/hotel38.jpg",
+    "images/hotel/hotel39.jpg",
+    "images/hotel/hotel40.jpg",
+    "images/hotel/hotel41.jpg",
+    "images/hotel/hotel42.jpg",
+    "images/hotel/hotel43.jpg",
+    "images/hotel/hotel44.jpg",
+    "images/hotel/hotel45.jpg",
+    "images/hotel/hotel46.jpg",
+    "images/hotel/hotel47.jpg",
+    "images/hotel/hotel48.jpg",
+    "images/hotel/hotel49.jpg",
+    "images/hotel/hotel50.jpg",
+    "images/hotel/hotel51.jpg",
+    "images/hotel/hotel52.jpg",
+    "images/hotel/hotel53.jpg",
+    "images/hotel/hotel54.jpg",
+    "images/hotel/hotel55.jpg",
+    "images/hotel/hotel56.jpg",
+    "images/hotel/hotel57.jpg",
+    "images/hotel/hotel58.jpg",
+    "images/hotel/hotel59.jpg",
+    "images/hotel/hotel60.jpg",
+    "images/hotel/hotel61.jpg",
+    "images/hotel/hotel62.jpg",
+    "images/hotel/hotel63.jpg",
+    "images/hotel/hotel64.jpg",
+    "images/hotel/hotel65.jpg",
+    "images/hotel/hotel66.jpg",
+    "images/hotel/hotel67.jpg",
+    "images/hotel/hotel68.jpg",
+    "images/hotel/hotel69.jpg",
+    "images/hotel/hotel70.jpg",
+    "images/hotel/hotel71.jpg",
+    "images/hotel/hotel72.jpg",
+    "images/hotel/hotel73.jpg",
+    "images/hotel/hotel74.jpg",
+    "images/hotel/hotel75.jpg",
+    "images/hotel/hotel76.jpg",
+    "images/hotel/hotel77.jpg",
+    "images/hotel/hotel78.jpg",
+    "images/hotel/hotel79.jpg",
+    "images/hotel/hotel80.jpg",
+    "images/hotel/hotel81.jpg",
+    "images/hotel/hotel82.jpg",
+    "images/hotel/hotel83.jpg",
+    "images/hotel/hotel84.jpg",
+    "images/hotel/hotel85.jpg",
+    "images/hotel/hotel86.jpg",
+    "images/hotel/hotel87.jpg",
+    "images/hotel/hotel88.jpg",
+    "images/hotel/hotel89.jpg",
+    "images/hotel/hotel90.jpg"
+];
+
+document.addEventListener("DOMContentLoaded", function() {
+    var container = document.getElementById("cardsContainer");
+
+    for (var i = 0; i < imageUrls.length; i++) {
+        var card = document.createElement("div");
+        card.className = "deal-card";
+        card.innerHTML = `
+            <img src="${imageUrls[i]}" alt="Hotel Image ${i + 1}">
+            <div class="deal-details">
+                <h5>Hotel ${i + 1}</h5>
+                <div class="rating">
+                    <div class="diamond" data-value="1"></div>
+                    <div class="diamond" data-value="2"></div>
+                    <div class="diamond" data-value="3"></div>
+                    <div class="diamond" data-value="4"></div>
+                    <div class="diamond" data-value="5"></div>
+                </div>
+                <div class="review-box">
+                    <h5>Reviews</h5>
+                    <div class="review">
+                        <p>User Review 1</p>
+                    </div>
+                    <div class="review">
+                        <p>User Review 2</p>
+                    </div>
+                    <!-- Add more reviews here -->
+                </div>
+            </div>
+            <button class="btn btn-primary more-info" data-toggle="modal" data-target="#myModal${i}">Know more about it</button>
+        `;
+
+        container.appendChild(card);
+
+        var modal = document.createElement("div");
+        modal.className = "modal fade";
+        modal.id = `myModal${i}`;
+        modal.tabIndex = -1;
+        modal.role = "dialog";
+        modal.setAttribute("aria-labelledby", "exampleModalLabel");
+        modal.setAttribute("aria-hidden", "true");
+        modal.innerHTML = `
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Details of Hotel ${i + 1}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Details about this place for Hotel ${i + 1}.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>`;
+        document.body.appendChild(modal);
+    }
+
+    // Script for adding review ratings
+    var diamonds = document.querySelectorAll('.diamond');
+    diamonds.forEach(diamond => {
+        diamond.addEventListener('click', (e) => {
+            const value = e.target.getAttribute('data-value');
+            const parent = e.target.parentNode;
+            const allDiamonds = parent.querySelectorAll('.diamond');
+            allDiamonds.forEach(d => {
+                d.classList.remove('selected');
+            });
+            for (let i = 0; i < value; i++) {
+                allDiamonds[i].classList.add('selected');
+            }
+        });
+    });
+});
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

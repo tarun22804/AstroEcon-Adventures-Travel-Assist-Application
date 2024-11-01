@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxis and Bike Taxis</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        header {
+            background: url('bikes home.jpeg') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        footer {
+            background-color: #343a40;
+        }
+
+        .sub-navbar {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .sub-navbar .nav-link {
+            color: #007bff;
+        }
+
+        .sub-navbar .nav-link:hover {
+            color: #0056b3;
+        }
+
+        .search-bar {
+            max-width: 300px;
+            margin-left: auto;
+        }
+
+        .logo {
+            max-height: 40px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="logo.png" alt="Taxi bookings" class="logo">
+       Book Your Taxi Here
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#vehicles">Vehicles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+            </li>
+        </ul>
+        <!-- Search Bar -->
+        <form class="form-inline search-bar">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="search()">Search</button>
+        </form>
+    </div>
+</nav>
+
+<!-- Sub-Navigation Bar -->
+<nav class="sub-navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="subNavbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#rapido">Rapido</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#uber">Uber</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#ola">Ola</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#other">Other Taxis</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Header Section -->
+<header class="bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1>Welcome to Taxis and Bike Taxis</h1>
+        <p class="lead">Your one-stop solution for car, bike, and taxi rentals</p>
+        <a href="#services" class="btn btn-secondary">Learn More</a>
+    </div>
+</header>
+
+<!-- Services Section -->
+<section id="services" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="car rentall.jpeg" class="card-img-top" alt="Car Rental">
+                    <div class="card-body">
+                        <h5 class="card-title">Car Rentals</h5>
+                        <p class="card-text">Choose from a variety of cars to suit your needs, from economy to premium vehicles.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="ev bike-taxi.jpeg" class="card-img-top" alt="Bike Taxi">
+                    <div class="card-body">
+                        <h5 class="card-title">Bike Taxi</h5>
+                        <p class="card-text">Quick and convenient bike taxi services for your daily commute.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="taxi rent88.jpeg" class="card-img-top" alt="Uber Taxi">
+                    <div class="card-body">
+                        <h5 class="card-title">Uber Taxi</h5>
+                        <p class="card-text">Reliable and affordable Uber-style taxi services at your fingertips.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vehicles Section -->
+<section id="vehicles" class="py-5 bg-light">
+    <div class="container">
+        <!-- Rapido Section -->
+        <div id="rapido" class="my-5">
+            <h3 class="text-center mb-4">Rapido</h3>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="evnormal1.jpeg" class="card-img-top" alt="Economy EV">
+                        <div class="card-body">
+                            <h5 class="card-title">Economy EV</h5>
+                            <p class="card-text">Affordable and eco-friendly electric vehicles.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="ev premium1.jpeg" class="card-img-top" alt="Premium EV">
+                        <div class="card-body">
+                            <h5 class="card-title">Premium EV</h5>
+                            <p class="card-text">Luxury electric vehicles for a premium experience.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="scooter1.jpeg" class="card-img-top" alt="Scooter">
+                        <div class="card-body">
+                            <h5 class="card-title">Scooters</h5>
+                            <p class="card-text">Easy-to-ride scooters for short trips.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="bike1.jpeg" class="card-img-top" alt="Premium Bike">
+                        <div class="card-body">
+                            <h5 class="card-title">Premium Bikes</h5>
+                            <p class="card-text">High-performance bikes for enthusiasts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Uber Section -->
+        <div id="uber" class="my-5">
+            <h3 class="text-center mb-4">Uber</h3>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="ev normal1.jpeg" class="card-img-top" alt="Economy EV">
+                        <div class="card-body">
+                            <h5 class="card-title">Economy EV</h5>
+                            <p class="card-text">Affordable and eco-friendly electric vehicles.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="ev premium2.jpeg" class="card-img-top" alt="Premium EV">
+                        <div class="card-body">
+                            <h5 class="card-title">Premium EV</h5>
+                            <p class="card-text">Luxury electric vehicles for a premium experience.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="scooter2.jpeg" class="card-img-top" alt="Scooter">
+                        <div class="card-body">
+                            <h5 class="card-title">Scooters</h5>
+                            <p class="card-text">Easy-to-ride scooters for short trips.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="bike2.jpeg" class="card-img-top" alt="Premium Bike">
+                        <div class="card-body">
+                            <h5 class="card-title">Premium Bikes</h5>
+                            <p class="card-text">High-performance bikes for enthusiasts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ola Section -->
+        <div id="ola" class="my-5">
+            <h3 class="text-center mb-4">Ola</h3>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="ev normal 3.jpeg" class="card-img-top" alt="Economy EV">
+                        <div class="card-body">
+                            <h5 class="card-title">Economy EV</h5>
+                            <p class="card-text">Affordable and eco-friendly electric vehicles.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="ev premium 3.jpeg" class="card-img-top" alt="Premium EV">
+                        <div class="card-body">
+                            <h5 class="card-title">Premium EV</h5>
+                            <p class="card-text">Luxury electric vehicles for a premium experience.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="scooter3.jpeg" class="card-img-top" alt="Scooter">
+                        <div class="card-body">
+                            <h5 class="card-title">Scooters</h5>
+                            <p class="card-text">Easy-to-ride scooters for short trips.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="bike3.jpeg" class="card-img-top" alt="Premium Bike">
+                        <div class="card-body">
+                            <h5 class="card-title">Premium Bikes</h5>
+                            <p class="card-text">High-performance bikes for enthusiasts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Contact Us</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" rows="5" required></textarea>
+                    </div>
+                    <button class="btn btn-primary"><a href="QR  webpage.html">Submit</a></button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h3>Our Office</h3>
+                <p>123 Rapidio Street<br>City, State, 12345</p>
+                <p>Email: contact@rapidio.com</p>
+                <p>Phone: (123) 456-7890</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-4">
+    <div class="container">
+        <p class="mb-0">&copy; 2024. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function search() {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var cards = document.querySelectorAll('.card');
+        cards.forEach(function(card) {
+            var title = card.querySelector('.card-title').textContent.toLowerCase();
+            if (title.includes(input)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+</body>
+</html>

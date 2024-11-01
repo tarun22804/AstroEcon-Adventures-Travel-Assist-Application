@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('payment-background.jpg') no-repeat center center fixed; /* Replace 'payment-background.jpg' with your image */
+      background-size: cover;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #fff; /* White text */
+    }
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .cvv-container {
+      position: relative;
+    }
+    .cvv-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: transparent;
+      border: none;
+      padding: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      color: #2ba7c9;
+    }
+    .cvv-toggle:hover {
+      color: #333;
+    }
+    button[type="submit"], button[type="button"] {
+      background-color: #353e48;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button[type="submit"]:hover, button[type="button"]:hover {
+      background-color: #ff0000;
+    }
+    .otp-container {
+      display: flex;
+      align-items: center;
+    }
+    .otp-input {
+      flex: 1;
+      margin-right: 10px;
+    }
+    .resend-otp, .send-otp {
+      background-color: #ffffff;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .resend-otp:hover, .send-otp:hover {
+      background-color: #000000;
+    }
+  </style>
+</head>
+<body>
+  <h2>Pay Useing Credit Card</h2>
+  <div class="form-container">
+    <form id="payment-form">
+      <div class="form-group">
+        <label for="card_number">Card Number:</label>
+        <input type="text" id="card_number" name="card_number" required>
+      </div>
+      <div class="form-group">
+        <label for="expiry_date">Expiration Date:</label>
+        <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YYYY" pattern="(0[1-9]|1[0-2])\/[0-9]{4}" required>
+      </div>
+      <div class="form-group">
+        <label for="name">Name on Card:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <div class="otp-container">
+          <input type="tel" id="phone" name="phone" required>
+          <button type="button" class="send-otp" onclick="sendOTP()">Send OTP</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="cvv-container">
+          <label for="cvv">CVV:</label>
+          <input type="password" id="cvv" name="cvv" required>
+          <button type="button" class="cvv-toggle" onclick="toggleCVV()">👁️</button>
+        </div>
+      </div>
+      <div class="form-group otp-container">
+        <input type="text" id="otp" name="otp" class="otp-input" placeholder="Enter OTP" required>
+        <button type="button" class="resend-otp" id="resend-otp" onclick="resendOTP()">Resend OTP</button>
+      </div>
+      <div class="form-group" id="otp-timer" style="display: none;">
+        <span id="otp-timer-text">You can resend OTP in <span id="otp-timer-value">60</span> seconds</span>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <button style="color: #ccc; background-color: blue;"><a href="hotels bookings page.html" style="color: #fff;">Payment</a></button>
+    </form>
+  </div>
+
+  <script>
+    function toggleCVV() {
+      var cvvInput = document.getElementById("cvv");
+      var cvvToggle = document.querySelector(".cvv-toggle");
+
+      if (cvvInput.type === "password") {
+        cvvInput.type = "text";
+        cvvToggle.textContent = "👁️";
+      } else {
+        cvvInput.type = "password";
+        cvvToggle.textContent = "🔒";
+      }
+    }
+
+    function resendOTP() {
+      // Code to resend OTP
+      alert("OTP has been resent!");
+      var timer = 60;
+      var otpTimerValue = document.getElementById("otp-timer-value");
+      var otpTimerText = document.getElementById("otp-timer-text");
+      var resendOTPButton = document.getElementById("resend-otp");
+      var sendOTPButton = document.getElementById("send-otp");
+
+      resendOTPButton.disabled = true;
+      otpTimerText.style.display = "block";
+
+      var countdown = setInterval(function() {
+        timer--;
+        otpTimerValue.textContent = timer;
+        if (timer <= 0) {
+          clearInterval(countdown);
+          otpTimerText.style.display = "none";
+          resendOTPButton.disabled = false;
+        }
+      }, 1000);
+    }
+
+    function sendOTP() {
+      // Code to send OTP
+      alert("OTP has been sent!");
+      var timer = 60;
+      var otpTimerValue = document.getElementById("otp-timer-value");
+      var otpTimerText = document.getElementById("otp-timer-text");
+      var resendOTPButton = document.getElementById("resend-otp");
+      var sendOTPButton = document.getElementById("send-otp");
+
+      sendOTPButton.disabled = true;
+      otpTimerText.style.display = "block";
+
+      var countdown = setInterval(function() {
+        timer--;
+        otpTimerValue.textContent = timer;
+        if (timer <= 0) {
+          clearInterval(countdown);
+          otpTimerText.style.display = "none";
+          sendOTPButton.disabled = false;
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

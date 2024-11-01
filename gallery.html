@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>50 Cards</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding-top: 50px;
+    }
+    .card {
+      margin-bottom: 20px;
+      border: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      height: 100%;
+    }
+    .card:hover {
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+      transform: scale(1.05);
+    }
+    .card .card-body {
+      padding: 20px;
+      text-align: center;
+    }
+    .card-title {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    .card-text {
+      font-size: 18px;
+      color: #555;
+    }
+    .select-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .select-place-btn {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div id="cardsContainer">
+  </div>
+</div>
+
+<script>
+  var imageUrls = [
+    "images/destination/amritsar1.jpg",
+    "images/destination/amritsar2.jpg",
+    "images/destination/amritsar3.jpg",
+    "images/destination/amritsar4.jpg",
+    "images/destination/goa1.jpg",
+    "images/destination/goa2.jpg",
+    "images/destination/goa3.jpg",
+    "images/destination/goa4.jpg",
+    "images/destination/hampi1.jpg",
+    "images/destination/hampi2.jpg",
+    "images/destination/hampi3.jpg",
+    "images/destination/hampi4.jpg",
+    "images/destination/indiagate1.jpg",
+    "images/destination/indiagate2.jpg",
+    "images/destination/indiagate3.jpg",
+    "images/destination/indiagate4.jpg",
+    "images/destination/jogfalls1.jpg",
+    "images/destination/jogfalls2.jpg",
+    "images/destination/jogfalls3.jpg",
+    "images/destination/jogfalls4.jpg",
+    "images/destination/kerala1.jpg",
+    "images/destination/kerala2.jpg",
+    "images/destination/kerala3.jpg",
+    "images/destination/kerala4.jpg",
+    "images/destination/ladakh1.jpg",
+    "images/destination/ladakh2.jpg",
+    "images/destination/ladakh3.jpg",
+    "images/destination/ladakh4.jpg",
+    "images/destination/manali1.jpg",
+    "images/destination/manali2.jpg",
+    "images/destination/manali3.jpg",
+    "images/destination/manali4.jpg",
+    "images/destination/mysore1.jpg",
+    "images/destination/mysore2.jpg",
+    "images/destination/mysore3.jpg",
+    "images/destination/mysore4.jpg",
+    "images/destination/rajasthan1.jpg",
+    "images/destination/rajasthan2.jpg",
+    "images/destination/rajasthan3.jpg",
+    "images/destination/rajasthan4.jpg",
+    "images/destination/russia.jpg",
+    "images/destination/srinagar1.jpg",
+    "images/destination/srinagar2.jpg",
+    "images/destination/srinagar3.jpg",
+    "images/destination/srinagar4.jpg",
+    "images/destination/tajmahal1.jpg",
+    "images/destination/tajmahal2.jpg",
+    "images/destination/tajmahal3.jpg",
+    "images/destination/tajmahal4.jpg",
+  ];
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var container = document.getElementById("cardsContainer");
+
+    for (var i = 0; i < imageUrls.length; i++) {
+      if (i % 4 === 0) {
+        var row = document.createElement("div");
+        row.className = "row";
+        container.appendChild(row);
+      }
+
+      var img = document.createElement("img");
+      img.src = imageUrls[i];
+      img.className = "card-img-top";
+      img.alt = "Card " + (i + 1);
+
+      var card = document.createElement("div");
+      card.className = "col-md-3 mb-3";
+      card.innerHTML = `
+        <div class="card">
+          ${img.outerHTML}
+          <div class="card-body">
+            <p class="card-text">Content for card ${i + 1}</p>
+            <button class="btn btn-primary more-info" data-toggle="modal" data-target="#myModal${i}">Know more about it</button>
+          </div>
+        </div>`;
+
+      row.appendChild(card);
+
+      var modal = document.createElement("div");
+      modal.className = "modal fade";
+      modal.id = `myModal${i}`;
+      modal.tabIndex = -1;
+      modal.role = "dialog";
+      modal.setAttribute("aria-labelledby", "exampleModalLabel");
+      modal.setAttribute("aria-hidden", "true");
+      modal.innerHTML = `
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Details of Card ${i + 1}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Details about this place for card ${i + 1}.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>`;
+      document.body.appendChild(modal);
+
+      if ((i + 1) % 4 === 0) {
+        var selectCol = document.createElement("div");
+        selectCol.className = "col-md-3 select-col";
+        selectCol.innerHTML = `
+          <div>
+            <button class="btn btn-secondary select-place-btn"><a href="tickets bookings.html">Select Place</a></button>
+          </div>`;
+        row.appendChild(selectCol);
+      }
+    }
+
+    if (imageUrls.length % 4 !== 0) {
+      var remainingCols = 4 - (imageUrls.length % 4);
+      for (var j = 0; j < remainingCols; j++) {
+        var emptyCol = document.createElement("div");
+        emptyCol.className = "col-md-3";
+        row.appendChild(emptyCol);
+      }
+      var selectCol = document.createElement("div");
+      selectCol.className = "col-md-3 select-col";
+      selectCol.innerHTML = `
+        <div>
+          <button class="btn btn-secondary select-place-btn">Select Place</button>
+        </div>`;
+      row.appendChild(selectCol);
+    }
+  });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

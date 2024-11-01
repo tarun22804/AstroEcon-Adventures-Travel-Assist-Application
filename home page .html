@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Econ Adventures</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="favikon.jpg">
+    <style>
+        body {
+            background-image: url('background2.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-nav {
+            margin: 0 auto;
+        }
+        .container {
+            margin-top: 90px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+        .circle-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            text-align: center;
+            margin: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #f8f9fa;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .circle:hover {
+            transform: translateY(-5px);
+            background-color: #e2e6ea;
+        }
+        .circle a {
+            font-size: 1.6rem;
+            margin-bottom: 0;
+        }
+        .jumbotron {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .jumbotron h1,
+        .jumbotron p {
+            color: #333;
+        }
+        .card-deck .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-deck .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+        .social-icons a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+        .doodle {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        @media (max-width: 768px) {
+            .circle {
+                margin: 10px 0;
+            }
+        }
+        .robot {
+            position: fixed;
+            bottom: -200px; /* Start position (hidden) */
+            right: 50px; /* Adjusted position */
+            width: 100px;
+            transition: bottom 0.5s ease-in-out;
+        }
+        .robot.show {
+            bottom: 100px; /* Visible position */
+        }
+        .robot .message {
+            display: none;
+            position: absolute;
+            top: -40px;
+            right: 110px; /* Adjusted position */
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .robot.show .message {
+            display: block;
+        }
+        .chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .chatbot-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+        }
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chatbot-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .chatbot-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        .chatbot-input {
+            display: flex;
+        }
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+        .chatbot-input button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h3>Welcome to Astro Econ Adventures</h3>
+        </div>
+
+        <div class="circle-container">
+            <div class="circle" id="gallery" data-toggle="tooltip" data-placement="top" title="View our gallery" onclick="">
+                <a target="_blank" href="gallery.html">Gallery</a>
+            </div>
+            <div class="circle" id="maps" data-toggle="tooltip" data-placement="top" title="Find locations" onclick="showAlert('Maps')">
+                <a href="maps.html" target="_blank">Maps</a>
+            </div>
+            <div class="circle" id="hotels-bookings" data-toggle="tooltip" data-placement="top" title="Book hotels" onclick="showAlert('Hotels Bookings')">
+                <a href="hotels bookings page.html" target="_blank">Hotels Bookings</a>
+            </div>
+        </div>
+        <div class="circle-container">
+            <div class="circle" id="taxis-bookings" data-toggle="tooltip" data-placement="top" title="Book taxis" onclick="showAlert('Taxis Bookings')">
+                <a target="_blank" href="taxi booking.html">Taxis Bookings</a>
+            </div>
+            <div class="circle" id="tickets booking" tooltip" data-placement="top" title="Book tickets" onclick="showAlert('tickets booking')">
+                <a href="tickets bookings .html" target="_blank">tickets booking</a>
+            </div>
+            <div class="circle" id="movie-tickets-bookings" data-toggle="tooltip" data-placement="top" title="Book movie tickets" onclick="showAlert('Movie Tickets Bookings')">
+                <a target="_blank" href="#">Movie Tickets</a>
+            </div>
+        </div>
+        <div class="circle-container">
+            <div class="circle" id="payments" data-toggle="tooltip" data-placement="top" title="Make payments" onclick="showAlert('Payments')">
+                <a target="_blank" href="payments.html">Payments</a>
+            </div>
+            <div class="circle" id="history" data-toggle="tooltip" data-placement="top" title="View history" onclick="showAlert('History')">
+                <a target="_blank" href="history.html">History</a>
+            </div>
+            <div class="circle" id="chatbot" data-toggle="tooltip" data-placement="top" title="Chat with us" onclick="toggleChatbot()">
+                <a href="javascript:void(0);">Chatbot</a>
+            </div>
+        </div>
+
+        <!-- Chatbot Container -->
+        <div id="chatbot-container" class="chatbot-container">
+            <div class="chatbot-header">
+                Chatbot
+            </div>
+            <div id="chatbot-messages" class="chatbot-messages"></div>
+            <div class="chatbot-input">
+                <input id="chatbot-input" type="text" placeholder="Type a message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <div class="robot">
+            <img src="robot.png" alt="Robot" width="100">
+            <div class="message">
+                <!-- Initial message set dynamically based on user input -->
+            </div>
+        </div>
+
+        <!-- Firebase and Dialogflow Libraries -->
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+
+        <script>
+            const firebaseConfig = {
+                apiKey: "YOUR_FIREBASE_API_KEY",
+                authDomain: "YOUR_FIREBASE_AUTH_DOMAIN",
+                projectId: "YOUR_FIREBASE_PROJECT_ID",
+                storageBucket: "YOUR_FIREBASE_STORAGE_BUCKET",
+                messagingSenderId: "YOUR_FIREBASE_MESSAGING_SENDER_ID",
+                appId: "YOUR_FIREBASE_APP_ID",
+                measurementId: "YOUR_FIREBASE_MEASUREMENT_ID"
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            const auth = firebase.auth();
+
+            function toggleChatbot() {
+                const chatbotContainer = document.getElementById("chatbot-container");
+                chatbotContainer.style.display = chatbotContainer.style.display === "flex" ? "none" : "flex";
+            }
+
+            async function sendMessage() {
+                const input = document.getElementById("chatbot-input");
+                const messages = document.getElementById("chatbot-messages");
+                const message = input.value.trim();
+
+                if (message !== "") {
+                    const userMessage = document.createElement("p");
+                    userMessage.textContent = message;
+                    userMessage.style.textAlign = "right";
+                    messages.appendChild(userMessage);
+                    input.value = "";
+
+                    try {
+                        const response = await fetch('/dialogflow', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ message: message })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Failed to get response from Dialogflow.');
+                        }
+
+                        const data = await response.json();
+
+                        const botMessage = document.createElement("p");
+                        botMessage.textContent = data.fulfillmentText;
+                        messages.appendChild(botMessage);
+                    } catch (error) {
+                        console.error('Error:', error);
+                        const errorMessage = document.createElement("p");
+                        errorMessage.textContent = 'Sorry, there was an error. Please try again.';
+                        messages.appendChild(errorMessage);
+                    }
+
+                    messages.scrollTop = messages.scrollHeight;
+                }
+            }
+
+            // Initialize tooltips
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+
+            // Function to set initial message based on user input
+            document.addEventListener('DOMContentLoaded', function () {
+                const robot = document.querySelector('.robot');
+                const chatbotMessageElement = document.querySelector('.message');
+
+                function setInitialMessage(message) {
+                    chatbotMessageElement.innerHTML = `<strong>ChatGPT:</strong> ${message}`;
+                }
+
+                // Example of setting an initial message
+                setInitialMessage("Hello! How can I assist you today?");
+
+                setTimeout(function () {
+                    robot.classList.add('show');
+                }, 1000); // Adjust timing as needed
+            });
+        </script>
+    </div>
+</body>
+</html>

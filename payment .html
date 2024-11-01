@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Page</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="fevicon.jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+   
+    body {
+      background-color: transparent;
+    }
+    .payment-form {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px;
+      background: transparent;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+    .card-img {
+      max-width: 100px;
+    }
+    .card-option {
+      margin-bottom: 20px;
+    }
+    .details-box {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+    .details-box h4 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+    .details-box .form-group label {
+      font-size: 14px;
+    }
+    .details-box .form-control {
+      font-size: 14px;
+    }
+    .go-next-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="payment-form">
+          <h4 class="text-center mb-4">Select Payment Method</h4>
+          <div class="card-option">
+            <img class="card-img" src="Visa.JPEG" alt="Visa">
+            <label><input type="radio" name="cardOption" value="Visa"> Visa</label>
+          </div>
+          <div class="card-option">
+            <img class="card-img" src="MASTER  card.jpeg" alt="Mastercard">
+            <label><input type="radio" name="cardOption" value="Mastercard"> Mastercard</label>
+          </div>
+          <div class="card-option">
+            <img class="card-img" src="americian express.jpeg" alt="American Express">
+            <label><input type="radio" name="cardOption" value="Amex"> American Express</label>
+          </div>
+          <div class="card-option">
+            <img class="card-img" src="credit card.jpeg" alt="credit Card">
+            <label><input type="radio" name="cardOption" value="credit card"> credit Card</label>
+          </div>
+          <div class="card-option">
+            <img class="card-img" src="upi.jpeg" alt="UpiId">
+            <label><input type="radio" name="cardOption" value="UPI"> UPI ID</label>
+          </div>
+          <div class="card-option">
+            <img class="card-img" src="net banking.png" alt="NetBanking">
+            <label><input type="radio" name="cardOption" value="NetBanking"> Net Banking</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="goNextBtn" class="btn btn-primary go-next-btn"><a href="payment details for creditcard.html" style="color: #f8f9fa;"> Next</a></button>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- FontAwesome JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+  <script>
+    document.getElementById('goNextBtn').addEventListener('click', function() {
+      var selectedOption = document.querySelector('input[name="cardOption"]:checked');
+      if (selectedOption) {
+        // Proceed to the next page or perform necessary action
+        alert('Selected payment method: ' + selectedOption.value);
+        // Here you can redirect to the next page or perform other actions
+      } else {
+        alert('Please select a payment method.');
+      }
+    });
+  </script>
+</body>
+</html>
